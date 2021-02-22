@@ -1,0 +1,26 @@
+import socket
+# 1创建一个udp套接字
+udp_socket = socket.socket(socket.AF_INET , socket.SOCK_DGRAM)
+
+# 2绑定本地的相关信息
+local_addr = ("",7788)  # ip地址和端口号，ip地址一般不用写
+udp_socket.bind(local_addr)
+
+# 3接受数据
+recv_data = udp_socket.recvfrom(1024)   #表示本次接受最大字节数
+# recv_data储存到的是一个元组(接受到的数据，(发送方的ip，端口号))
+recv_msg = recv_data[0]  #存储接受的消息
+send_addr = recv_data[1]  #存储发送方的地址信息
+
+# 4显示接收到的数据
+print("%s:%s" % (str(send_addr),recv_msg.encode("gbk")))
+
+
+ # 发送数据
+while True:
+     send_date = input("输入你要发送的数据：")
+     if send_date == "exit": break
+     # udp_socket.sendto("hahaha",对方的IP)
+     udp_socket.sendto(send_date.encode("utf-8"),("192.168.12.1",8080))
+
+udp_socket.close()
