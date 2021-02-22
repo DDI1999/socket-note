@@ -16,7 +16,12 @@ send_addr = recv_data[1]  #存储发送方的地址信息
 print("%s:%s" % (str(send_addr),recv_msg.encode("gbk")))
 
 
- # 发送数据
+ 
+  # 使用udp/tcp发送数据
+ # 绑定本地信息
+ # udp_socket.bind("",端口号)
+udp_socket.bind("",7808)
+ # 发送信息
 while True:
      send_date = input("输入你要发送的数据：")
      if send_date == "exit": break
